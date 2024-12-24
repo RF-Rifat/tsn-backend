@@ -9,7 +9,7 @@ import pick from '../../../shared/pick';
 import { jobsFilterableFields } from './job.constant';
 import { paginationFields } from '../../../constant/pagination';
 
-//  create  job seeker profile
+//  create user profile
 const createJob = catchAsync(async (req: Request, res: Response) => {
   const user = req.user as JwtPayload;
   const data = req.body;

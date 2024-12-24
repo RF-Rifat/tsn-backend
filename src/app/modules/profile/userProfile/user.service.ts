@@ -3,121 +3,28 @@ import { JwtPayload } from 'jsonwebtoken';
 import { SortOrder, startSession, Types } from 'mongoose';
 import ApiError from '../../../../errors/ApiError';
 import { FileUploadHelper } from '../../../../helper/FileUploadHelper';
-import { IUploadFile } from '../../../../inerfaces/file';
-import {
-  IJobSeekerFilterableFields,
-  IJobSeekerProfile,
-} from './jobSeeker.interface';
-import { JobSeekerProfile } from './jobSeeker.model';
-import { IPaginationOptions } from '../../../../inerfaces/pagination';
-import { paginationHelpers } from '../../../../helper/paginationHelper';
-import { IGenericResponse } from '../../../../shared/sendResponse';
 import { buildSortConditions } from '../../../../helper/filterHelper';
+import { paginationHelpers } from '../../../../helper/paginationHelper';
+import { IUploadFile } from '../../../../inerfaces/file';
+import { IPaginationOptions } from '../../../../inerfaces/pagination';
+import { IGenericResponse } from '../../../../shared/sendResponse';
 import { User } from '../../user/user.model';
-import { jobSeekerSearchableFields } from './jobSeeker.constant';
+import { userSearchableFields } from './user.constant';
+import { IUserProfile, UserFilterableFields } from './user.interface';
+import { UserProfile } from './user.model';
 
-// Create Job Seeker Profile
-// const createJobSeekerProfile = async (
-//   payload: IJobSeekerProfile,
-//   photoFile: IUploadFile | null,
-//   user: JwtPayload,
-// ): Promise<IJobSeekerProfile | null> => {
-//   let uploadedPhotoUrl: string | null = null;
-
-//   // Sanitize incoming data to prevent unauthorized fields
-//   const sanitizePayload = (data: IJobSeekerProfile) => {
-//     const sanitizedData = { ...data } as any;
-//     delete sanitizedData.profileStatus;
-//     delete sanitizedData.isVerified;
-//     return sanitizedData;
-//   };
-
-//   // Upload photo to Cloudinary
-//   const uploadPhoto = async (file: IUploadFile): Promise<string> => {
-//     const url = await FileUploadHelper.uploadSingleToCloudinary(file);
-//     if (!url) {
-//       throw new ApiError(
-//         httpStatus.INTERNAL_SERVER_ERROR,
-//         'Photo upload failed',
-//       );
-//     }
-//     return url;
-//   };
-
-//   // Start transaction
-//   const session = await startSession();
-//   session.startTransaction();
-
-//   try {
-//     // Step 1: Check if the profile already exists for the user
-//     const existingProfile = await JobSeekerProfile.findOne({
-//       user: user.userId,
-//     });
-
-//     if (existingProfile) {
-//       throw new ApiError(httpStatus.CONFLICT, 'Profile already exists');
-//     }
-
-//     await User.findByIdAndUpdate(user?.userId, {
-//       isProfileCreated: true,
-//     }).session(session);
-
-//     // Step 2: Sanitize the payload
-//     const sanitizedPayloadReady = sanitizePayload(payload);
-
-//     // Step 3: Handle photo upload if provided
-//     if (photoFile) {
-//       uploadedPhotoUrl = await uploadPhoto(photoFile);
-//       sanitizedPayloadReady.photo = uploadedPhotoUrl;
-//     }
-
-//     // Step 4: Create the job seeker profile in the database
-//     sanitizedPayloadReady.user = user?.userId as unknown as Types.ObjectId;
-
-//     const createdProfile = await JobSeekerProfile.create(
-//       [sanitizedPayloadReady],
-//       { session },
-//     );
-
-//     // Find and populate the newly created profile
-//     const populatedProfile = await JobSeekerProfile.findById(
-//       createdProfile[0]._id,
-//     ) // Access the first document from the create() array
-//       .populate('user') // Populate the `user` field
-//       .session(session);
-//     console.log(populatedProfile); // Ensure it uses the same session
-
-//     // Commit transaction
-//     await session.commitTransaction();
-//     session.endSession();
-
-//     return populatedProfile; // `create` with an array returns an array
-//   } catch (error) {
-//     // Rollback transaction
-//     await session.abortTransaction();
-//     session.endSession();
-
-//     // Rollback photo upload if it exists
-//     if (uploadedPhotoUrl) {
-//       await FileUploadHelper.deleteImageByUrl(uploadedPhotoUrl);
-//     }
-
-//     throw error;
-//   }
-// };
-
-const createJobSeekerProfile = async (
-  payload: IJobSeekerProfile,
+const createUserProfile = async (
+  payload: IUserProfile,
   photoFile: IUploadFile | null,
   user: JwtPayload,
-): Promise<IJobSeekerProfile | null> => {
+): Promise<IUserProfile | null> => {
   let uploadedPhotoUrl: string | null = null;
   const session = await startSession();
   session.startTransaction();
 
   try {
     // 1. Check if profile already exists for the user
-    const existingProfile = await JobSeekerProfile.findOne({
+    const existingProfile = await UserProfile.findOne({
       user: user.userId,
     });
     if (existingProfile) {
@@ -132,9 +39,9 @@ const createJobSeekerProfile = async (
     );
 
     // 3. Sanitize incoming payload to remove unwanted fields
-    const sanitizePayload = (data: IJobSeekerProfile): IJobSeekerProfile => {
-      const { profileStatus, isVerified, ...sanitizedData } = data;
-      return sanitizedData as IJobSeekerProfile;
+    const sanitizePayload = (data: IUserProfile): IUserProfile => {
+      const { ...sanitizedData } = data;
+      return sanitizedData as IUserProfile;
     };
     const sanitizedPayload = sanitizePayload(payload);
 
@@ -154,16 +61,14 @@ const createJobSeekerProfile = async (
       sanitizedPayload.photo = uploadedPhotoUrl;
     }
 
-    // 5. Create the job seeker profile and link it to the user
+    // 5. Create the User profile and link it to the user
     sanitizedPayload.user = user.userId as unknown as Types.ObjectId;
-    const createdProfile = await JobSeekerProfile.create([sanitizedPayload], {
+    const createdProfile = await UserProfile.create([sanitizedPayload], {
       session,
     });
 
     // 6. Populate the newly created profile
-    const populatedProfile = await JobSeekerProfile.findById(
-      createdProfile[0]._id,
-    )
+    const populatedProfile = await UserProfile.findById(createdProfile[0]._id)
       .populate('user')
       .session(session);
 
@@ -194,12 +99,12 @@ const createJobSeekerProfile = async (
   }
 };
 
-// update job Seeker Profile
-const updateJobSeekerProfile = async (
+// update user Profile
+const updateUserProfile = async (
   profileId: string,
-  payload?: Partial<IJobSeekerProfile>,
+  payload?: Partial<IUserProfile>,
   photoFile?: IUploadFile | null,
-): Promise<IJobSeekerProfile | null> => {
+): Promise<IUserProfile | null> => {
   let uploadedPhotoUrl: string | null = null;
 
   // Upload photo to Cloudinary
@@ -218,13 +123,13 @@ const updateJobSeekerProfile = async (
 
   try {
     // Step 1: Check if the profile exists
-    const profile = await JobSeekerProfile.findById(profileId);
+    const profile = await UserProfile.findById(profileId);
     if (!profile) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Job Seeker Profile Not Found');
+      throw new ApiError(httpStatus.NOT_FOUND, 'User Profile Not Found');
     }
 
     // Step 2: Initialize updated data
-    const updatedData: Partial<IJobSeekerProfile> = { ...payload };
+    const updatedData: Partial<IUserProfile> = { ...payload };
 
     // Step 3: Handle photo upload if provided
     if (photoFile) {
@@ -237,14 +142,14 @@ const updateJobSeekerProfile = async (
     // Step 4: Sanitize payload to remove restricted fields
     const sanitizedData = sanitizePayload(updatedData);
 
-    // Step 5: Update the job seeker profile
-    const updatedProfile = await JobSeekerProfile.findByIdAndUpdate(
+    // Step 5: Update the user profile
+    const updatedProfile = await UserProfile.findByIdAndUpdate(
       profileId,
       sanitizedData,
       { new: true },
     );
 
-    return updatedProfile as IJobSeekerProfile;
+    return updatedProfile as IUserProfile;
   } catch (error) {
     // Step 6: Rollback photo upload if an error occurs
     if (photoFile && uploadedPhotoUrl) {
@@ -254,10 +159,10 @@ const updateJobSeekerProfile = async (
   }
 };
 
-// for admin shown job seeker profile
-const getAllUnverifiedJobSeekerProfile = async (
+// for admin shown user profile
+const getAllUnverifiedUserProfile = async (
   paginationOptions: IPaginationOptions,
-): Promise<IGenericResponse<IJobSeekerProfile[]>> => {
+): Promise<IGenericResponse<IUserProfile[]>> => {
   const { limit, page, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
 
@@ -274,8 +179,8 @@ const getAllUnverifiedJobSeekerProfile = async (
   // Build sort conditions
   const sortCondition = buildSortConditions(sortBy, sortOrder);
 
-  // Fetch paginated and sorted unverified job seeker profiles
-  const unverifiedJobSeekers = await JobSeekerProfile.find(queryConditions)
+  // Fetch paginated and sorted unverified user profiles
+  const unverifiedUser = await UserProfile.find(queryConditions)
     .populate('user') // Populate related user information
     .sort(sortCondition)
     .skip(skip)
@@ -283,11 +188,11 @@ const getAllUnverifiedJobSeekerProfile = async (
     .lean();
 
   // Count total documents for pagination meta
-  const total = await JobSeekerProfile.countDocuments(queryConditions);
+  const total = await UserProfile.countDocuments(queryConditions);
 
   // Return the response in a structured format
   return {
-    data: unverifiedJobSeekers,
+    data: unverifiedUser,
     meta: {
       total,
       page,
@@ -296,34 +201,34 @@ const getAllUnverifiedJobSeekerProfile = async (
   };
 };
 
-const updateJobSeekerProfileByadmin = async (
+const updateUserProfileByadmin = async (
   profileId: string,
-  payload: Partial<IJobSeekerProfile>,
+  payload: Partial<IUserProfile>,
 ) => {
-  // Check if the job seeker profile exists
-  const isExistedJobSeekerProfile = await JobSeekerProfile.findById(profileId);
-  if (!isExistedJobSeekerProfile) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job Seeker profile not found');
+  // Check if the User profile exists
+  const isExistedUserProfile = await UserProfile.findById(profileId);
+  if (!isExistedUserProfile) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User profile not found');
   }
 
   // Prepare the update data
-  const updateData: Partial<IJobSeekerProfile | any> = { ...payload };
+  const updateData: Partial<IUserProfile | any> = { ...payload };
 
   // If the admin sends profileStatus: "ready", set isVerified to true
   if (payload.profileStatus === 'ready') {
     updateData.isVerified = true;
   }
 
-  // Update the job seeker profile with the prepared data
-  return await JobSeekerProfile.findByIdAndUpdate(profileId, updateData, {
+  // Update the user profile with the prepared data
+  return await UserProfile.findByIdAndUpdate(profileId, updateData, {
     new: true,
   });
 };
 
-// Job Seeker Nid verification
-const verifyJobSeekerNid = async (
+// user Nid verification
+const verifyUserNid = async (
   profileId: string,
-  payload: Partial<IJobSeekerProfile | any>,
+  payload: Partial<IUserProfile | any>,
   files: IUploadFile[],
 ) => {
   if (!payload?.nationalNIdNo) {
@@ -349,15 +254,14 @@ const verifyJobSeekerNid = async (
   );
 
   try {
-    // Step 1: Check if the job seeker profile exists
-    const isExistedJobSeekerProfile =
-      await JobSeekerProfile.findById(profileId);
-    if (!isExistedJobSeekerProfile) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Job Seeker profile not found');
+    // Step 1: Check if the user profile exists
+    const isExistedUserProfile = await UserProfile.findById(profileId);
+    if (!isExistedUserProfile) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'User profile not found');
     }
 
     // Step 2: Sanitize the payload to ensure only relevant fields are updated
-    const sanitizedPayload: Partial<IJobSeekerProfile | any> = { ...payload };
+    const sanitizedPayload: Partial<IUserProfile | any> = { ...payload };
 
     // Remove any unwanted fields from the payload
     delete sanitizedPayload.profileStatus;
@@ -387,7 +291,7 @@ const verifyJobSeekerNid = async (
     // Step 4: Add uploaded NID image URLs to the profile's documentsAndLinks
     const updatedProfileData = {
       ...sanitizedPayload,
-      photo: uploadedPhotoUrl || isExistedJobSeekerProfile?.photo,
+      photo: uploadedPhotoUrl || isExistedUserProfile?.photo,
 
       nationalIdProofs: {
         front: uploadedNidFrontUrl,
@@ -397,8 +301,8 @@ const verifyJobSeekerNid = async (
       },
     };
 
-    // Step 5: Update the job seeker profile with the new data
-    const updatedProfile = await JobSeekerProfile.findByIdAndUpdate(
+    // Step 5: Update the User profile with the new data
+    const updatedProfile = await UserProfile.findByIdAndUpdate(
       profileId,
       updatedProfileData,
       { new: true },
@@ -427,9 +331,9 @@ const verifyJobSeekerNid = async (
 
 // // get All Ready Job
 const getAllReadyProfile = async (
-  filters: IJobSeekerFilterableFields,
+  filters: UserFilterableFields,
   paginationOptions: IPaginationOptions,
-): Promise<IGenericResponse<IJobSeekerProfile[]> | null> => {
+): Promise<IGenericResponse<IUserProfile[]> | null> => {
   // Extract searchTerm to implement search query
   const { searchTerm, skills, ...filtersData } = filters;
   const { page, limit, skip, sortBy, sortOrder } =
@@ -440,7 +344,7 @@ const getAllReadyProfile = async (
   // **1️⃣ Search Logic (for 'searchTerm')**
   if (searchTerm) {
     andConditions.push({
-      $or: jobSeekerSearchableFields.map(field => ({
+      $or: userSearchableFields.map(field => ({
         [field]: { $regex: searchTerm, $options: 'i' },
       })),
     });
@@ -479,12 +383,12 @@ const getAllReadyProfile = async (
     andConditions.length > 0 ? { $and: andConditions } : {};
 
   // **7️⃣ Execute Query**
-  const result = await JobSeekerProfile.find(whereConditions)
+  const result = await UserProfile.find(whereConditions)
     .sort(sortConditions)
     .skip(skip)
     .limit(limit)
     .populate('user');
-  const total = await JobSeekerProfile.countDocuments(whereConditions);
+  const total = await UserProfile.countDocuments(whereConditions);
 
   // **8️⃣ Return Paginated Response**
   return {
@@ -497,11 +401,11 @@ const getAllReadyProfile = async (
   };
 };
 
-export const JobSeekerServiceProfile = {
-  createJobSeekerProfile,
-  updateJobSeekerProfile,
-  verifyJobSeekerNid,
-  getAllUnverifiedJobSeekerProfile,
-  updateJobSeekerProfileByadmin,
+export const userServiceProfile = {
+  createUserProfile,
+  updateUserProfile,
+  verifyUserNid,
+  getAllUnverifiedUserProfile,
+  updateUserProfileByadmin,
   getAllReadyProfile,
 };

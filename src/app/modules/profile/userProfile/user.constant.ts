@@ -1,4 +1,4 @@
-export const jobSeekerFilterableFields = [
+export const userFilterableFields = [
   'searchTerm',
   'industry',
   'subIndustry',
@@ -14,7 +14,7 @@ export const jobSeekerFilterableFields = [
   'lookingFor',
 ];
 
-export const jobSeekerSearchableFields = [
+export const userSearchableFields = [
   'industry',
   'subIndustry',
   'category',
@@ -28,6 +28,3 @@ export const jobSeekerSearchableFields = [
   'locationPreference',
   'lookingFor',
 ];
-
-
-

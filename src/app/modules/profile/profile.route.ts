@@ -4,12 +4,12 @@ import { FileUploadHelper } from '../../../helper/FileUploadHelper';
 import auth from '../../middlewares/auth';
 import { companyProfileController } from './companyProfile/company.controller';
 import { profileController } from './profile.controller';
-import { JobSeekerProfileController } from './jobSeekerProfile/jobSeeker.controller';
+import { UserProfileController } from './userProfile/user.controller';
 
 const router = express.Router();
 
 const companyUrl = '/company';
-const job_seekerUrl = '/job_seeker';
+const userUrl = '/user';
 // const admin = '/admin';
 
 // get profile
@@ -18,15 +18,15 @@ router.get(
   auth(
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.SUPER_ADMIN,
-    ENUM_USER_ROLE.JOB_SEEKER,
+    ENUM_USER_ROLE.USER,
     ENUM_USER_ROLE.COMPANY,
   ),
   profileController.getProfileByUserId,
 );
 
 router.get(
-  `${job_seekerUrl}/ready`,
-  JobSeekerProfileController.getAllReadyJobSeekerProfile,
+  `${userUrl}/ready`,
+  UserProfileController.getAllReadyUserProfile,
 );
 
 // company profile routes
@@ -44,40 +44,39 @@ router.patch(
   companyProfileController.updateCompanyProfile,
 );
 
-// Job Seeker profile routes
-// job seeker
+// User profile routes
 router.post(
-  `${job_seekerUrl}`,
-  auth(ENUM_USER_ROLE.JOB_SEEKER),
+  `${userUrl}`,
+  auth(ENUM_USER_ROLE.USER),
   FileUploadHelper.upload.single('photo'),
-  JobSeekerProfileController.createJobSeekerProfile,
+  UserProfileController.createUserProfile,
 );
 
-//job seeker
+// User
 router.patch(
-  `${job_seekerUrl}/:id`,
-  auth(ENUM_USER_ROLE.JOB_SEEKER),
+  `${userUrl}/:id`,
+  auth(ENUM_USER_ROLE.USER),
   FileUploadHelper.upload.single('photo'),
-  JobSeekerProfileController.updateJobSeekerProfile,
+  UserProfileController.updateUserProfile,
 );
 
 router.patch(
-  `${job_seekerUrl}/verify-nid/:id`,
-  auth(ENUM_USER_ROLE.JOB_SEEKER),
+  `${userUrl}/verify-nid/:id`,
+  auth(ENUM_USER_ROLE.USER),
   FileUploadHelper.upload.fields([
     { name: 'photo', maxCount: 1 },
     { name: 'nidFront', maxCount: 1 },
     { name: 'nidBack', maxCount: 1 },
     { name: 'nidWithSelfie', maxCount: 1 },
   ]),
-  JobSeekerProfileController.verifyJobSeekerProfile,
+  UserProfileController.verifyUserProfile,
 );
 
 // admin
 router.get(
-  `${job_seekerUrl}`,
+  `${userUrl}`,
   auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-  JobSeekerProfileController.getAllUnverifiedJobSeekerProfileByAdmin,
+  UserProfileController.getAllUnverifiedUserProfileByAdmin,
 );
 
 // admin
@@ -89,9 +88,9 @@ router.get(
 
 // admin
 router.patch(
-  `${job_seekerUrl}/verify/:id`,
+  `${userUrl}/verify/:id`,
   auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.SUPER_ADMIN),
-  JobSeekerProfileController.updateJobSeekerProfileStatusByAdmin,
+  UserProfileController.updateUserProfileStatusByAdmin,
 );
 
 export const profileRoute = router;

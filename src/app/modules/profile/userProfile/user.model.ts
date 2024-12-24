@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { IJobSeekerProfile } from './jobSeeker.interface';
+import { IUserProfile } from './user.interface';
 
-const JobSeekerProfileSchema = new Schema<IJobSeekerProfile>(
+const UserProfileSchema = new Schema<IUserProfile>(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -173,7 +173,7 @@ const JobSeekerProfileSchema = new Schema<IJobSeekerProfile>(
   },
 );
 
-export const JobSeekerProfile = model<IJobSeekerProfile>(
-  'JobSeekerProfile',
-  JobSeekerProfileSchema,
+export const UserProfile = model<IUserProfile>(
+  'UserProfile',
+  UserProfileSchema,
 );

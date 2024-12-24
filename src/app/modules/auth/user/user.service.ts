@@ -1,11 +1,3 @@
-/**
- * Title: 'Job seeker register Server Algorithm'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 28-11-2024
- *
- */
-
 import httpStatus from 'http-status';
 import { startSession } from 'mongoose';
 import ApiError from '../../../../errors/ApiError';
@@ -15,10 +7,10 @@ import { ILoginUserResponse } from '../auth.interface';
 import { AuthService } from '../auth.service';
 
 // customer registration
-const jobSeekerRegistration = async (
+const userRegistration = async (
   payload: IUser,
 ): Promise<ILoginUserResponse> => {
-  payload.role = 'job-seeker';
+  payload.role = 'user';
 
   const isNotUniqueEmail = await User.isUserExist(payload.email);
   if (isNotUniqueEmail) {
@@ -54,6 +46,6 @@ const jobSeekerRegistration = async (
   }
 };
 
-export const jobSeekerService = {
-  jobSeekerRegistration,
+export const userService = {
+  userRegistration,
 };

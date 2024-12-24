@@ -1,5 +1,5 @@
 import { ICompanyProfile } from '../profile/companyProfile/company.interface';
-import { IJobSeekerProfile } from '../profile/jobSeekerProfile/jobSeeker.interface';
+import { IUserProfile } from '../profile/userProfile/user.interface';
 
 export type ILoginUser = {
   email: string;
@@ -11,7 +11,7 @@ export type ILoginUserResponse = {
   refreshToken?: string;
   isEmailVerified?: boolean;
   data: {
-    profile?: Partial<ICompanyProfile | IJobSeekerProfile>;
+    profile?: Partial<ICompanyProfile | IUserProfile>;
   };
 };
 

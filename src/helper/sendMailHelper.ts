@@ -9,15 +9,17 @@ export type IEmailInfo = {
 const sendMail = async (emailInfo: IEmailInfo) => {
   const { html, subject, to } = emailInfo;
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: config.email_server_host,
+    port: config.email_server_port || 465,
+    secure: true,
     auth: {
-      user: config.email,
-      pass: config.email_secret,
+      user: config.email_server_user,
+      pass: config.email_server_password,
     },
-  });
+  } as nodemailer.TransportOptions);
 
   await transporter.sendMail({
-    from: config.email,
+    from: config.email_from,
     to,
     subject,
     html,

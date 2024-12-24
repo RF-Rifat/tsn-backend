@@ -6,7 +6,7 @@ import crypto from 'crypto';
 
 // get OTP
 export const getOTP = async (email: string): Promise<IOtp> => {
-  const otp = crypto.randomBytes(3).toString('hex');
+  const otp = crypto.randomInt(100000, 999999).toString(); 
   const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
   const otpRecord = new OTP({
     email,
@@ -17,7 +17,7 @@ export const getOTP = async (email: string): Promise<IOtp> => {
   return await otpRecord.save();
 };
 
-// verifiy OTP
+// verify OTP
 export const verifyOtp = async (email: string, otp: string) => {
   const otpRecord = await OTP.findOne({ email, otp });
 

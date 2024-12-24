@@ -1,10 +1,7 @@
 import { Types } from 'mongoose';
 import { IUser } from '../../user/user.interface';
-import {
-  jobSeekerFilterableFields,
-  jobSeekerSearchableFields,
-} from './jobSeeker.constant';
-export type IJobSeekerProfile = {
+import { userFilterableFields, userSearchableFields } from './user.constant';
+export type IUserProfile = {
   user: Types.ObjectId | IUser;
   bio?: string;
   photo: string;
@@ -83,12 +80,12 @@ export type IJobSeekerProfile = {
   profileCompletionPercentage?: number;
 };
 
-export type IJobSeekerFilterableFields = {
+export type UserFilterableFields = {
   // eslint-disable-next-line no-unused-vars
-  [key in (typeof jobSeekerFilterableFields)[number]]: string;
+  [key in (typeof userFilterableFields)[number]]: string;
 };
 
-export type IJobSeekerSearchableFields = {
+export type UserSearchableFields = {
   // eslint-disable-next-line no-unused-vars
-  [key in (typeof jobSeekerSearchableFields)[number]]: string;
+  [key in (typeof userSearchableFields)[number]]: string;
 };

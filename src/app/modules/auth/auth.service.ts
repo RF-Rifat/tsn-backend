@@ -13,8 +13,8 @@ import { sendMailerHelper } from '../../../helper/sendMailHelper';
 import { AdminProfile } from '../profile/adminProfile/adminProfile.model';
 import { ICompanyProfile } from '../profile/companyProfile/company.interface';
 import { CompanyProfile } from '../profile/companyProfile/company.model';
-import { IJobSeekerProfile } from '../profile/jobSeekerProfile/jobSeeker.interface';
-import { JobSeekerProfile } from '../profile/jobSeekerProfile/jobSeeker.model';
+import { IUserProfile } from '../profile/userProfile/user.interface';
+import { UserProfile } from '../profile/userProfile/user.model';
 import { IUser } from '../user/user.interface';
 import { User } from '../user/user.model';
 import {
@@ -68,8 +68,8 @@ const userLogin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   let profile;
   if (role == 'company') {
     profile = await CompanyProfile.findOne({ user: _id }).populate('user');
-  } else if (role == 'job-seeker') {
-    profile = await JobSeekerProfile.findOne({ user: _id }).populate('user');
+  } else if (role == 'user') {
+    profile = await UserProfile.findOne({ user: _id }).populate('user');
   } else if (role === 'admin' || role === 'super-admin') {
     profile = await AdminProfile.findOne({ user: _id }).populate('user');
   }
@@ -113,7 +113,7 @@ const userLogin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     accessToken,
     refreshToken,
     data: {
-      profile: userCredential as Partial<IJobSeekerProfile | ICompanyProfile>,
+      profile: userCredential as Partial<IUserProfile | ICompanyProfile>,
     },
   };
 };
@@ -334,10 +334,10 @@ const sendVerificationEmail = async (payload: any): Promise<IAuthMessage> => {
                   <p>We received a request to verify your email address. To complete the process, please use the OTP code below:</p>
                   <div class="otp-code">${otp?.otp}</div>
                   <p>If you did not request this, please ignore this email. The code will expire in 5 minutes.</p>
-                  <p>Thank you for choosing tns-backend!</p>
+                  <p>Thank you for choosing tsn-backend!</p>
               </div>
               <div class="footer">
-                  &copy; ${currentYear} tns-backend. All rights reserved.
+                  &copy; ${currentYear} tsn-backend. All rights reserved.
               </div>
           </div>
       </body>
@@ -392,15 +392,6 @@ const verifyEmail = async (payload: any): Promise<any> => {
     config.jwt.accessTokenSecret as Secret,
     config.jwt.accessTokenExpireIn as string,
   );
-
-  // const user = await User.findById(_id);
-  // if (role === 'job-seeker') {
-  //   profile = await U.findOne({ user: _id }).populate('user');
-  // } else if (role === 'company') {
-  //   profile = await CompanyProfile.findOne({ user: _id }).populate('user');
-  // } else if (role === 'admin' || role === 'super-admin') {
-  //   profile = await AdminProfile.findOne({ user: _id }).populate('user');
-  // }
 
   return {
     accessToken: accessToken,
@@ -500,7 +491,7 @@ const forgetPassword = async (
                   <p>If you did not request this, please disregard this email. Your account is still secure.</p>
               </div>
               <div class="footer">
-                  <p>Best regards,<br />The tns-backend Team</p>
+                  <p>Best regards,<br />The tsn-backend Team</p>
               </div>
           </div>
       </body>

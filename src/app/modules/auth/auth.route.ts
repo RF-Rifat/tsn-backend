@@ -2,11 +2,11 @@ import express from 'express';
 import { ENUM_USER_ROLE } from '../../../enums/role';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/ValidateRequest';
+import { AdminController } from './admin/admin.controller';
 import { AuthController } from './auth.controller';
 import { authValidationSchema } from './auth.validation';
 import { companyController } from './company/company.controller';
-import { jobSeekerController } from './job-seeker/job-seeker.controller';
-import { AdminController } from './admin/admin.controller';
+import { userController } from './user/user.controller';
 
 const router = express.Router();
 
@@ -21,8 +21,8 @@ router.post('/register/admin', AdminController.adminRegistration);
 // company registration
 router.post('/register/company', companyController.companyRegistration);
 
-// Job Seeker Registration
-router.post('/register/job-seeker', jobSeekerController.jobSeekerRegistration);
+// User Registration
+router.post('/register/user', userController.userRegistration);
 
 // verifiy email
 router.patch(
@@ -30,7 +30,7 @@ router.patch(
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.JOB_SEEKER,
+    ENUM_USER_ROLE.USER,
     ENUM_USER_ROLE.COMPANY,
   ),
   AuthController.verifyEmail,
@@ -47,7 +47,7 @@ router.patch(
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.JOB_SEEKER,
+    ENUM_USER_ROLE.USER,
     ENUM_USER_ROLE.COMPANY,
   ),
   AuthController.changePassword,
@@ -58,7 +58,7 @@ router.patch(
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.JOB_SEEKER,
+    ENUM_USER_ROLE.USER,
     ENUM_USER_ROLE.COMPANY,
   ),
   AuthController.changeEmail,
@@ -73,7 +73,7 @@ router.post(
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.JOB_SEEKER,
+    ENUM_USER_ROLE.USER,
     ENUM_USER_ROLE.COMPANY,
   ),
   AuthController.sendVerificationEmail,

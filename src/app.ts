@@ -6,21 +6,20 @@
  *
  */
 
-import express, { Application } from 'express';
-import cors from 'cors';
-import GlobalErrorHandler from './app/middlewares/GlobalErrorHanlder';
-import handleNotFoundApi from './errors/handleNotFound';
-import router from './app/routes';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express, { Application } from 'express';
+import GlobalErrorHandler from './app/middlewares/GlobalErrorHanlder';
+import router from './app/routes';
+import handleNotFoundApi from './errors/handleNotFound';
 const app: Application = express();
 
 app.use(
   cors({
     origin: [
-      'http://localhost:8000',
-      'https://online-staff.vercel.app',
-      'https://www.tns-backend.net',
-      'https://tns-backend.net',
+      'http://localhost:3000',
+      'http://tsneduglownetwork.com',
+      'https://tsn-backend.net',
     ],
     credentials: true,
   }),

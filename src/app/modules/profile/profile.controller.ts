@@ -1,11 +1,11 @@
+import { Request, Response } from 'express';
+import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
 import catchAsync from '../../../shared/catchAsync';
-import { ICompanyProfile } from './companyProfile/company.interface';
-import { IJobSeekerProfile } from './jobSeekerProfile/jobSeeker.interface';
 import sendResponse from '../../../shared/sendResponse';
-import httpStatus from 'http-status';
+import { ICompanyProfile } from './companyProfile/company.interface';
 import { profileService } from './profile.service';
-import { Request, Response } from 'express';
+import { IUserProfile } from './userProfile/user.interface';
 
 // get Company Specific Profile
 const getProfileByUserId = catchAsync(async (req: Request, res: Response) => {
@@ -13,7 +13,7 @@ const getProfileByUserId = catchAsync(async (req: Request, res: Response) => {
 
   const result = await profileService.getProfileByUserId(user);
 
-  sendResponse<ICompanyProfile | IJobSeekerProfile>(res, {
+  sendResponse<ICompanyProfile | IUserProfile>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Profile Fetched  Successfully !',
@@ -29,7 +29,7 @@ const getSpecificProfileByAdmin = catchAsync(
       id as string,
     );
 
-    sendResponse<ICompanyProfile | IJobSeekerProfile>(res, {
+    sendResponse<ICompanyProfile | IUserProfile>(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Profile Fetched  Successfully !',
