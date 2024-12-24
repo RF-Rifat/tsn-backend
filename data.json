@@ -1,0 +1,320 @@
+  [
+  
+
+
+  {
+    "dateOfBirth": "1993-09-30T00:00:00.000Z",
+    "gender": "Female",
+    "nationality": "Canadian",
+    "contactNo": "+14165551234",
+    "address": {
+      "country": "Canada",
+      "stateOrCity": "Toronto",
+      "zipCode": "M5V 2T6",
+      "fullAddress": "321 Queen St W, Toronto, ON, Canada"
+    },
+    "jobTitle": "Marketing Specialist",
+    "category": "Marketing",
+    "subCategory": "Digital Marketing",
+    "skills": ["SEO", "Content Marketing", "Social Media Management", "Google Analytics"],
+    "experienceLevel": "Mid",
+    "industry": "Advertising",
+    "subIndustry": "Digital Advertising",
+    "homeCurrency": "CAD",
+    "timezone": "GMT-5:00",
+    "availableHours": 35,
+    "hourlyPayInUSD": 40,
+    "yearsOfExperience": 4,
+    "locationPreference": "remote",
+    "nationalIdNo": "C2468101214",
+    "education": {
+      "educationLevel": "Bachelor's Degree",
+      "fieldOfStudy": "Marketing",
+      "graduationYear": 2016
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "English", "proficiency": "Intermediate" },
+        { "language": "French", "proficiency": "Intermediate" }
+      ],
+      "lastActive": "2 days or less",
+      "expectedSalary": 75000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user4" },
+        { "platform": "Twitter", "url": "https://twitter.com/user4" }
+      ]
+    }
+  },
+  {
+    "dateOfBirth": "1987-12-10T00:00:00.000Z",
+    "gender": "Male",
+    "nationality": "Australian",
+    "contactNo": "+61412345678",
+    "address": {
+      "country": "Australia",
+      "stateOrCity": "Sydney",
+      "zipCode": "2000",
+      "fullAddress": "987 George St, Sydney, NSW, Australia"
+    },
+    "jobTitle": "Project Manager",
+    "category": "Project Management",
+    "subCategory": "IT Project Management",
+    "skills": ["Agile", "Scrum", "JIRA", "Risk Management"],
+    "experienceLevel": "Senior",
+    "industry": "Information Technology",
+    "subIndustry": "Software Development",
+    "homeCurrency": "AUD",
+    "timezone": "GMT+10:00",
+    "availableHours": 40,
+    "hourlyPayInUSD": 70,
+    "yearsOfExperience": 10,
+    "locationPreference": "onsite",
+    "nationalIdNo": "A1357924680",
+    "education": {
+      "educationLevel": "Master's Degree",
+      "fieldOfStudy": "Project Management",
+      "graduationYear": 2012
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "English", "proficiency": "Native" }
+      ],
+      "lastActive": "1 week or less",
+      "expectedSalary": 130000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user5" }
+      ]
+    }
+  },
+  {
+    "dateOfBirth": "1992-05-18T00:00:00.000Z",
+    "gender": "Female",
+    "nationality": "Brazilian",
+    "contactNo": "+5511987654321",
+    "address": {
+      "country": "Brazil",
+      "stateOrCity": "São Paulo",
+      "zipCode": "01310-200",
+      "fullAddress": "654 Av. Paulista, São Paulo, SP, Brazil"
+    },
+    "jobTitle": "Data Scientist",
+    "category": "Data Science",
+    "subCategory": "Machine Learning",
+    "skills": ["Python", "R", "TensorFlow", "Scikit-learn"],
+    "experienceLevel": "Mid",
+    "industry": "Research",
+    "subIndustry": "Artificial Intelligence",
+    "homeCurrency": "BRL",
+    "timezone": "GMT-3:00",
+    "availableHours": 35,
+    "hourlyPayInUSD": 45,
+    "yearsOfExperience": 3,
+    "locationPreference": "hybrid",
+    "nationalIdNo": "B9876543210",
+    "education": {
+      "educationLevel": "Ph.D.",
+      "fieldOfStudy": "Computer Science",
+      "graduationYear": 2020
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "Portuguese", "proficiency": "Native" },
+        { "language": "English", "proficiency": "Fluent" }
+      ],
+      "lastActive": "3 days or less",
+      "expectedSalary": 95000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user6" },
+        { "platform": "GitHub", "url": "https://github.com/user6" }
+      ]
+    }
+  },
+  {
+    "dateOfBirth": "1989-02-25T00:00:00.000Z",
+    "gender": "Male",
+    "nationality": "French",
+    "contactNo": "+33612345678",
+    "address": {
+      "country": "France",
+      "stateOrCity": "Paris",
+      "zipCode": "75001",
+      "fullAddress": "123 Rue de Rivoli, Paris, France"
+    },
+    "jobTitle": "Financial Analyst",
+    "category": "Finance",
+    "subCategory": "Investment Analysis",
+    "skills": ["Financial Modeling", "Valuation", "Bloomberg Terminal", "Excel"],
+    "experienceLevel": "Senior",
+    "industry": "Banking",
+    "subIndustry": "Investment Banking",
+    "homeCurrency": "EUR",
+    "timezone": "GMT+1:00",
+    "availableHours": 45,
+    "hourlyPayInUSD": 80,
+    "yearsOfExperience": 7,
+    "locationPreference": "onsite",
+    "nationalIdNo": "F1234567890",
+    "education": {
+      "educationLevel": "Master's Degree",
+      "fieldOfStudy": "Finance",
+      "graduationYear": 2014
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "French", "proficiency": "Native" },
+        { "language": "English", "proficiency": "Fluent" }
+      ],
+      "lastActive": "2 days or less",
+      "expectedSalary": 110000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user7" }
+      ]
+    }
+  },
+  {
+    "dateOfBirth": "1994-08-07T00:00:00.000Z",
+    "gender": "Female",
+    "nationality": "Japanese",
+    "contactNo": "+81345678901",
+    "address": {
+      "country": "Japan",
+      "stateOrCity": "Tokyo",
+      "zipCode": "100-0005",
+      "fullAddress": "456 Marunouchi, Chiyoda-ku, Tokyo, Japan"
+    },
+    "jobTitle": "UI Designer",
+    "category": "Design",
+    "subCategory": "User Interface",
+    "skills": ["Adobe Creative Suite", "Sketch", "InVision", "Typography"],
+    "experienceLevel": "Entry",
+    "industry": "Creative",
+    "subIndustry": "Graphic Design",
+    "homeCurrency": "JPY",
+    "timezone": "GMT+9:00",
+    "availableHours": 25,
+    "hourlyPayInUSD": 30,
+    "yearsOfExperience": 1,
+    "locationPreference": "remote",
+    "nationalIdNo": "J2468101214",
+    "education": {
+      "educationLevel": "Bachelor's Degree",
+      "fieldOfStudy": "Graphic Design",
+      "graduationYear": 2022
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "Japanese", "proficiency": "Native" },
+        { "language": "English", "proficiency": "Intermediate" }
+      ],
+      "lastActive": "1 day or less",
+      "expectedSalary": 50000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user8" },
+        { "platform": "Dribbble", "url": "https://dribbble.com/user8" }
+      ]
+    }
+  },
+  {
+    "dateOfBirth": "1986-11-12T00:00:00.000Z",
+    "gender": "Male",
+    "nationality": "South African",
+    "contactNo": "+27823456789",
+    "address": {
+      "country": "South Africa",
+      "stateOrCity": "Cape Town",
+      "zipCode": "8001",
+      "fullAddress": "789 Long St, Cape Town, Western Cape, South Africa"
+    },
+    "jobTitle": "DevOps Engineer",
+    "category": "IT Operations",
+    "subCategory": "Cloud Infrastructure",
+    "skills": ["AWS", "Docker", "Kubernetes", "Jenkins"],
+    "experienceLevel": "Senior",
+    "industry": "Technology",
+    "subIndustry": "Cloud Computing",
+    "homeCurrency": "ZAR",
+    "timezone": "GMT+2:00",
+    "availableHours": 40,
+    "hourlyPayInUSD": 60,
+    "yearsOfExperience": 9,
+    "locationPreference": "hybrid",
+    "nationalIdNo": "S9876543210",
+    "education": {
+      "educationLevel": "Bachelor's Degree",
+      "fieldOfStudy": "Computer Engineering",
+      "graduationYear": 2008
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "English", "proficiency": "Fluent" },
+        { "language": "Afrikaans", "proficiency": "Native" }
+      ],
+      "lastActive": "4 days or less",
+      "expectedSalary": 105000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user9" },
+        { "platform": "GitHub", "url": "https://github.com/user9" }
+      ]
+    }
+  },
+  {
+    "dateOfBirth": "1991-04-03T00:00:00.000Z",
+    "gender": "Female",
+    "nationality": "Swedish",
+    "contactNo": "+46701234567",
+    "address": {
+      "country": "Sweden",
+      "stateOrCity": "Stockholm",
+      "zipCode": "111 52",
+      "fullAddress": "321 Drottninggatan, Stockholm, Sweden"
+    },
+    "jobTitle": "Content Strategist",
+    "category": "Content Creation",
+    "subCategory": "Content Strategy",
+    "skills": ["Content Planning", "SEO", "Copywriting", "Analytics"],
+    "experienceLevel": "Mid",
+    "industry": "Media",
+    "subIndustry": "Digital Media",
+    "homeCurrency": "SEK",
+    "timezone": "GMT+1:00",
+    "availableHours": 30,
+    "hourlyPayInUSD": 55,
+    "yearsOfExperience": 6,
+    "locationPreference": "remote",
+    "nationalIdNo": "S1234567890",
+    "education": {
+      "educationLevel": "Master's Degree",
+      "fieldOfStudy": "Communications",
+      "graduationYear": 2016
+    },
+    "additionalDetails": {
+      "languages": [
+        { "language": "Swedish", "proficiency": "Native" },
+        { "language": "English", "proficiency": "Fluent" },
+        { "language": "German", "proficiency": "Intermediate" }
+      ],
+      "lastActive": "5 days or less",
+      "expectedSalary": 85000
+    },
+    "documentsAndLinks": {
+      "socialMediaLinks": [
+        { "platform": "LinkedIn", "url": "https://linkedin.com/in/user10" },
+        { "platform": "Medium", "url": "https://medium.com/@user10" }
+      ]
+    }
+  }
+]
+
+ 
