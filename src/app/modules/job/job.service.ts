@@ -2,7 +2,7 @@ import httpStatus from 'http-status';
 import { IJobPost, IJobsFilterableFields } from './job.interface';
 import { User } from '../user/user.model';
 import ApiError from '../../../errors/ApiError';
-import { Jwt, JwtPayload } from 'jsonwebtoken';
+import { JwtPayload } from 'jsonwebtoken';
 // import { PendingJob, ReadyJob } from './job.model';
 import { IPaginationOptions } from '../../../inerfaces/pagination';
 import { IGenericResponse } from '../../../shared/sendResponse';

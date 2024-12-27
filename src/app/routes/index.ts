@@ -4,6 +4,7 @@ import { catalogRoutes } from '../modules/catalog/catalog.route';
 import { profileRoute } from '../modules/profile/profile.route';
 import { UserRoutes } from '../modules/user/user.route';
 import { jobRoute } from '../modules/job/job.route';
+import { universityRoute } from '../modules/university/university.route';
 
 const router = express.Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: '/job',
     route: jobRoute,
+  },
+  {
+    path: '/university',
+    route: universityRoute,
   },
 ];
 

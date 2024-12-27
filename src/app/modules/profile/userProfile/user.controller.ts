@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
@@ -93,22 +94,19 @@ const updateUserProfileStatusByAdmin = catchAsync(
 
 const verifyUserProfile = catchAsync(async (req: Request, res: Response) => {
   const profileId = req.params.id;
-// @ts-ignore
-  const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-  // Flatten the files object into an array with fieldname property
+  const files = req.files as { [fieldName: string]: Express.Multer.File[] };
+
   const flattenedFiles = Object.entries(files).reduce(
-    (acc, [fieldname, fieldFiles]) => {
-      return [...acc, ...fieldFiles.map(file => ({ ...file, fieldname }))];
+    (acc, [fieldName, fieldFiles]) => {
+      return [...acc, ...fieldFiles.map(file => ({ ...file, fieldName }))];
     },
     [] as IUploadFile[],
   );
 
   // Assuming the payload is coming from the request body
   const payload: Partial<IUserProfile> = JSON.parse(req.body.data);
-  // console.log('i am from controller ',payload);
 
-  // Call the service method with the required parameters
   const result = await userServiceProfile.verifyUserNid(
     profileId,
     payload,

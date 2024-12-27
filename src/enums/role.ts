@@ -2,6 +2,6 @@
 export enum ENUM_USER_ROLE {
   ADMIN = 'admin',
   SUPER_ADMIN = 'super-admin',
-  COMPANY = 'company',
+  COMPANY = 'agent',
   USER = 'user',
 }

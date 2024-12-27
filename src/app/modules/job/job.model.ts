@@ -19,15 +19,6 @@ const JobPostSchema = new Schema<IJobPost>(
       required: true,
       trim: true,
     },
-    // requirements: {
-    //   type: [string],
-    // },
-    // benefits: {
-    //   type: [string],
-    // },
-    // responsibilities: {
-    //   type: [string],
-    // },
     employmentType: {
       type: String,
       enum: ['part-time', 'full-time'],
