@@ -7,7 +7,7 @@
  */
 
 import mongoose from 'mongoose';
-import { IErrorMessages } from '../inerfaces/error';
+import { IErrorMessages } from '../interfaces/error';
 
 const handleCastError = (error: mongoose.Error.CastError) => {
   const errors: IErrorMessages[] = [

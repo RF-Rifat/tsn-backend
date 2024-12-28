@@ -39,7 +39,7 @@ export type IUserProfile = {
   workExperience?: {
     hasExperience?: boolean;
     experiences?: {
-      companyName: string;
+      agentName: string;
       role: string;
       duration: {
         start: Date;

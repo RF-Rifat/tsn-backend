@@ -3,17 +3,17 @@ import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { ICompanyProfile } from './companyProfile/company.interface';
+import { IAgentProfile } from './agentProfile/agent.interface';
 import { profileService } from './profile.service';
 import { IUserProfile } from './userProfile/user.interface';
 
-// get Company Specific Profile
+// get agent Specific Profile
 const getProfileByUserId = catchAsync(async (req: Request, res: Response) => {
   const user = req.user as JwtPayload;
 
   const result = await profileService.getProfileByUserId(user);
 
-  sendResponse<ICompanyProfile | IUserProfile>(res, {
+  sendResponse<IAgentProfile | IUserProfile>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Profile Fetched  Successfully !',
@@ -29,7 +29,7 @@ const getSpecificProfileByAdmin = catchAsync(
       id as string,
     );
 
-    sendResponse<ICompanyProfile | IUserProfile>(res, {
+    sendResponse<IAgentProfile | IUserProfile>(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Profile Fetched  Successfully !',

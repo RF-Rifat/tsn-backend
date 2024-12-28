@@ -2,66 +2,66 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
 import ApiError from '../../../../errors/ApiError';
-import { IUploadFile } from '../../../../inerfaces/file';
+import { IUploadFile } from '../../../../interfaces/file';
 import catchAsync from '../../../../shared/catchAsync';
 import sendResponse from '../../../../shared/sendResponse';
-import { ICompanyProfile } from './company.interface';
-import { companyProfileService } from './company.service';
+import { IAgentProfile } from './agent.interface';
+import { agentProfileService } from './agent.service';
 
-//  create company profile
-const createCompanyProfile = catchAsync(async (req: Request, res: Response) => {
+//  create agent profile
+const createAgentProfile = catchAsync(async (req: Request, res: Response) => {
   const user = req.user as JwtPayload;
   const data = JSON.parse(req.body.data);
 
   const logoFile = req.file as IUploadFile;
   if (!logoFile) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Company logo is required');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Agent logo is required');
   }
 
-  const result = await companyProfileService.createCompanyProfile(
+  const result = await agentProfileService.createAgentProfile(
     data,
     logoFile,
     user,
   );
 
-  sendResponse<ICompanyProfile>(res, {
+  sendResponse<IAgentProfile>(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: 'Company Profile Created Successfully !',
+    message: 'Agent Profile Created Successfully !',
     data: result,
   });
 });
 
-// update company profile
-const updateCompanyProfile = catchAsync(async (req: Request, res: Response) => {
+// update agent profile
+const updateAgentProfile = catchAsync(async (req: Request, res: Response) => {
   //   const user = req.user as JwtPayload;
-  const proifleId = req.params.id;
+  const profileId = req.params.id;
   const payload = req.body.data;
   const imgFile = req.file as IUploadFile;
 
   let data;
-  console.log("p...", payload);
+  console.log('p...', payload);
   if (payload) {
     data = JSON.parse(payload);
   } else if (!imgFile && !payload) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'updated data not found ');
   }
 
-  const result = await companyProfileService.updateCompanyProfile(
-    proifleId,
+  const result = await agentProfileService.updateAgentProfile(
+    profileId,
     data,
     imgFile,
   );
 
-  sendResponse<ICompanyProfile>(res, {
+  sendResponse<IAgentProfile>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Company Profile updated  Successfully !',
+    message: 'Agent Profile updated  Successfully !',
     data: result,
   });
 });
 
-export const companyProfileController = {
-  createCompanyProfile,
-  updateCompanyProfile,
+export const agentProfileController = {
+  createAgentProfile,
+  updateAgentProfile,
 };

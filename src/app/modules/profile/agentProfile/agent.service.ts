@@ -1,19 +1,19 @@
+import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
-import { FileUploadHelper } from '../../../../helper/FileUploadHelper';
-import { IUploadFile } from '../../../../inerfaces/file';
-import { ICompanyProfile } from './company.interface';
-import { CompanyProfile } from './company.model';
 import { startSession, Types } from 'mongoose';
 import ApiError from '../../../../errors/ApiError';
-import httpStatus from 'http-status';
+import { FileUploadHelper } from '../../../../helper/FileUploadHelper';
+import { IUploadFile } from '../../../../interfaces/file';
 import { User } from '../../user/user.model';
+import { IAgentProfile } from './agent.interface';
+import { AgentProfile as agentProfile } from './agent.model';
 
-// create company profile
-const createCompanyProfile = async (
-  payload: ICompanyProfile,
+// create agent profile
+const createAgentProfile = async (
+  payload: IAgentProfile,
   logoFile: IUploadFile,
   user: JwtPayload,
-): Promise<ICompanyProfile | null> => {
+): Promise<IAgentProfile | null> => {
   let logoUrl: string | null = null;
 
   // Start a transaction
@@ -39,14 +39,13 @@ const createCompanyProfile = async (
       isProfileCreated: true,
     }).session(session);
 
-    // Step 3: Create the company profile in the database
-    const createdProfile = await CompanyProfile.create([withLogoUrlData], {
+    // Step 3: Create the agent profile in the database
+    const createdProfile = await agentProfile.create([withLogoUrlData], {
       session,
     });
 
-    const populatedProfile = await CompanyProfile.findById(
-      createdProfile[0]._id,
-    )
+    const populatedProfile = await agentProfile
+      .findById(createdProfile[0]._id)
       .populate('user')
       .session(session);
 
@@ -69,16 +68,16 @@ const createCompanyProfile = async (
   }
 };
 
-// update company profile
-const updateCompanyProfile = async (
-  companyId: string,
-  payload?: ICompanyProfile,
+// update agent profile
+const updateAgentProfile = async (
+  agentId: string,
+  payload?: IAgentProfile,
   logoFile?: IUploadFile | null,
-): Promise<ICompanyProfile | null> => {
+): Promise<IAgentProfile | null> => {
   let uploadedLogoUrl: any;
 
   try {
-    const updatedData: Partial<ICompanyProfile> = { ...payload };
+    const updatedData: Partial<IAgentProfile> = { ...payload };
 
     // If logoFile is provided, upload to Cloudinary and update the profile with the new logo URL.
     if (logoFile) {
@@ -89,17 +88,17 @@ const updateCompanyProfile = async (
       }
     }
 
-    // Update the company profile in the database and return the updated profile.
-    const result = await CompanyProfile.findByIdAndUpdate(
-      companyId,
+    // Update the agent profile in the database and return the updated profile.
+    const result = await agentProfile.findByIdAndUpdate(
+      agentId,
       updatedData,
       { new: true },
     );
 
-    return result as ICompanyProfile;
+    return result as IAgentProfile;
   } catch (error) {
     if (logoFile && uploadedLogoUrl) {
-      console.log('i am from catch in update company profile ');
+      console.log('I am from catch in update agent profile');
       await FileUploadHelper.deleteImageByUrl(uploadedLogoUrl as string);
     }
 
@@ -107,7 +106,7 @@ const updateCompanyProfile = async (
   }
 };
 
-export const companyProfileService = {
-  createCompanyProfile,
-  updateCompanyProfile,
+export const agentProfileService = {
+  createAgentProfile,
+  updateAgentProfile,
 };

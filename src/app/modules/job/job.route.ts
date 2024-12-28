@@ -8,7 +8,7 @@ const router = express.Router();
 router.get(
   '/',
   auth(
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.SUPER_ADMIN,
   ),
@@ -19,12 +19,12 @@ router.get('/ready', jobController.getAllJobs);
 
 router.get('/:id', jobController.getSpecificJob);
 
-router.post('/', auth(ENUM_USER_ROLE.COMPANY), jobController.createJob);
+router.post('/', auth(ENUM_USER_ROLE.AGENT), jobController.createJob);
 
 router.patch(
   '/:id',
   auth(
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.SUPER_ADMIN,
   ),

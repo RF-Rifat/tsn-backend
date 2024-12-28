@@ -7,7 +7,7 @@
  */
 
 import { ZodError, ZodIssue } from 'zod';
-import { IErrorMessages } from '../inerfaces/error';
+import { IErrorMessages } from '../interfaces/error';
 
 const handleZodError = (error: ZodError) => {
   const errors: IErrorMessages[] = error.issues.map((issue: ZodIssue) => {

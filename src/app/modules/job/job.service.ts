@@ -1,15 +1,15 @@
 import httpStatus from 'http-status';
-import { IJobPost, IJobsFilterableFields } from './job.interface';
-import { User } from '../user/user.model';
-import ApiError from '../../../errors/ApiError';
 import { JwtPayload } from 'jsonwebtoken';
+import ApiError from '../../../errors/ApiError';
+import { User } from '../user/user.model';
+import { IJobPost, IJobsFilterableFields } from './job.interface';
 // import { PendingJob, ReadyJob } from './job.model';
-import { IPaginationOptions } from '../../../inerfaces/pagination';
-import { IGenericResponse } from '../../../shared/sendResponse';
-import { jobsSearchableFields } from './job.constant';
 import FilterPaginationHelper from '../../../helper/filterHelper';
+import { IPaginationOptions } from '../../../interfaces/pagination';
+import { IGenericResponse } from '../../../shared/sendResponse';
+import { AgentProfile } from '../profile/agentProfile/agent.model';
+import { jobsSearchableFields } from './job.constant';
 import { Job } from './job.model';
-import { CompanyProfile } from '../profile/companyProfile/company.model';
 
 // Create Job
 const createJob = async (
@@ -23,7 +23,7 @@ const createJob = async (
 
   const isUserExisted = await User.isUserExist(email);
 
-  const isCreatedProfile = await CompanyProfile.findOne({
+  const isCreatedProfile = await AgentProfile.findOne({
     user: userId,
   });
   if (!isCreatedProfile) {
@@ -131,7 +131,7 @@ const updateJob = async (
 const getSpecificJob = async (jobId: string): Promise<IJobPost | null> => {
   const result = await Job.findById(jobId).lean();
   // console.log(result);
-  const profile = await CompanyProfile.findOne({ user: result?.user })
+  const profile = await AgentProfile.findOne({ user: result?.user })
     .populate('user')
     .lean();
   // console.log(profile);
@@ -139,11 +139,11 @@ const getSpecificJob = async (jobId: string): Promise<IJobPost | null> => {
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
   }
-  const allData = { company: profile, ...result };
+  const allData = { agent: profile, ...result };
   return allData;
 };
 
-const getSpecificCompanyJob = async (
+const getSpecificAgentJob = async (
   payload: JwtPayload,
 ): Promise<IJobPost[]> => {
   const result = await Job.find({ user: payload.userId })
@@ -158,5 +158,5 @@ export const jobService = {
   getSpecificUserJob,
   getAllReadyJob,
   getSpecificJob,
-  getSpecificCompanyJob,
+  getSpecificAgentJob,
 };

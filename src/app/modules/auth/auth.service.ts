@@ -11,8 +11,8 @@ import {
 import { sendMailerHelper } from '../../../helper/sendMailHelper';
 
 import { AdminProfile } from '../profile/adminProfile/adminProfile.model';
-import { ICompanyProfile } from '../profile/companyProfile/company.interface';
-import { CompanyProfile } from '../profile/companyProfile/company.model';
+import { IAgentProfile } from '../profile/agentProfile/agent.interface';
+import { AgentProfile } from '../profile/agentProfile/agent.model';
 import { IUserProfile } from '../profile/userProfile/user.interface';
 import { UserProfile } from '../profile/userProfile/user.model';
 import { IUser } from '../user/user.interface';
@@ -66,8 +66,8 @@ const userLogin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const user = await User.findById(_id);
   // console.log(user)
   let profile;
-  if (role == 'company') {
-    profile = await CompanyProfile.findOne({ user: _id }).populate('user');
+  if (role == 'agent') {
+    profile = await AgentProfile.findOne({ user: _id }).populate('user');
   } else if (role == 'user') {
     profile = await UserProfile.findOne({ user: _id }).populate('user');
   } else if (role === 'admin' || role === 'super-admin') {
@@ -113,7 +113,7 @@ const userLogin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     accessToken,
     refreshToken,
     data: {
-      profile: userCredential as Partial<IUserProfile | ICompanyProfile>,
+      profile: userCredential as Partial<IUserProfile | IAgentProfile>,
     },
   };
 };

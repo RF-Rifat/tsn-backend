@@ -116,7 +116,7 @@ const UserProfileSchema = new Schema<IUserProfile>(
       hasExperience: { type: Boolean },
       experiences: [
         {
-          companyName: { type: String, required: true },
+          agentName: { type: String, required: true },
           role: { type: String, required: true },
           duration: {
             start: { type: Date, required: true },

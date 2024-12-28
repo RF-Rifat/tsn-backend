@@ -4,14 +4,13 @@ import config from '../../../../config';
 import catchAsync from '../../../../shared/catchAsync';
 import sendResponse from '../../../../shared/sendResponse';
 import { ILoginUserResponse } from '../auth.interface';
-import { companyService } from './company.service';
+import { agentService } from './agent.service';
 
 // borrower registration with login
-const companyRegistration = catchAsync(async (req: Request, res: Response) => {
-  const { ...signUpdata } = req.body;
-  
+const agentRegistration = catchAsync(async (req: Request, res: Response) => {
+  const { ...signUpData } = req.body;
 
-  const result = await companyService.companyRegistration(signUpdata);
+  const result = await agentService.agentRegistration(signUpData);
 
   const { refreshToken, accessToken, data } = result;
   const responseData = { accessToken, data };
@@ -26,11 +25,11 @@ const companyRegistration = catchAsync(async (req: Request, res: Response) => {
   sendResponse<ILoginUserResponse>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Company Registration successfully !',
+    message: 'Agent Registration successfully !',
     data: responseData,
   });
 });
 
-export const companyController = {
-  companyRegistration,
+export const agentController = {
+  agentRegistration,
 };

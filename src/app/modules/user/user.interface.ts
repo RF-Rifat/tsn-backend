@@ -7,7 +7,7 @@ export type IUser = {
   name: string;
   email: string;
   password: string;
-  role?: 'user' | 'company' | 'admin' | 'super-admin';
+  role?: 'user' | 'agent' | 'admin' | 'super-admin';
   membership: 'FreePlan' | 'ProPlan' | 'PremiumPlan';
   isProfileCreated: boolean;
   passwordChangedAt?: Date;

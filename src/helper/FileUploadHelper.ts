@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 import multer from 'multer';
 import path from 'path';
 import ApiError from '../errors/ApiError';
-import { IClodinaryResponse, IUploadFile } from '../inerfaces/file';
+import { IClodinaryResponse, IUploadFile } from '../interfaces/file';
 
 // Configuration
 cloudinary.config({

@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 import { JwtPayload } from 'jsonwebtoken';
 import { paginationFields } from '../../../../constant/pagination';
 import ApiError from '../../../../errors/ApiError';
-import { IUploadFile } from '../../../../inerfaces/file';
+import { IUploadFile } from '../../../../interfaces/file';
 import catchAsync from '../../../../shared/catchAsync';
 import pick from '../../../../shared/pick';
 import sendResponse, {

@@ -18,7 +18,7 @@ import { ZodError } from 'zod';
 import handleCastError from '../../errors/handleCastError';
 import handleZodError from '../../errors/handleZodError';
 // import { errorLogger } from '../../shared/logger';
-import { IErrorMessages } from '../../inerfaces/error';
+import { IErrorMessages } from '../../interfaces/error';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,

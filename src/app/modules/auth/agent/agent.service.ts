@@ -1,11 +1,3 @@
-/**
- * Title: 'Company register Server Algorithm'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 28-11-2024
- *
- */
-
 import httpStatus from 'http-status';
 import { startSession } from 'mongoose';
 import ApiError from '../../../../errors/ApiError';
@@ -15,10 +7,10 @@ import { ILoginUserResponse } from '../auth.interface';
 import { AuthService } from '../auth.service';
 
 // customer registration
-const companyRegistration = async (
+const agentRegistration = async (
   payload: IUser,
 ): Promise<ILoginUserResponse> => {
-  payload.role = 'company';
+  payload.role = 'agent';
 
   const isNotUniqueEmail = await User.isUserExist(payload.email);
   if (isNotUniqueEmail) {
@@ -54,6 +46,6 @@ const companyRegistration = async (
   }
 };
 
-export const companyService = {
-  companyRegistration,
+export const agentService = {
+  agentRegistration,
 };

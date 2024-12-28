@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../../shared/catchAsync';
-import { IUser, IUserFilters } from '../user/user.interface';
-import sendResponse, { IGenericResponse } from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
-import { UserService } from './user.service';
-import pick from '../../../shared/pick';
 import { paginationFields } from '../../../constant/pagination';
+import { IUploadFile } from '../../../interfaces/file';
+import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
+import sendResponse, { IGenericResponse } from '../../../shared/sendResponse';
+import { IUser } from '../user/user.interface';
 import { userFilterableFields } from './user.constant';
-import { IUploadFile } from '../../../inerfaces/file';
-import { ILoginUser } from '../auth/auth.interface';
+import { UserService } from './user.service';
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
   const result = await UserService.createUser(req.body);
@@ -68,7 +67,7 @@ const updateUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const deleteUserByadmin = catchAsync(async (req: Request, res: Response) => {
+const deleteUserByAdmin = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   await UserService.deleteUser(id);
 
@@ -85,5 +84,5 @@ export const UserController = {
   getOneUser,
   updateUser,
   createUser,
-  deleteUserByadmin,
+  deleteUserByAdmin,
 };

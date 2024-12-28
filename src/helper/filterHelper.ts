@@ -1,6 +1,6 @@
 import { Model, SortOrder } from 'mongoose';
+import { IPaginationOptions } from '../interfaces/pagination';
 import { IGenericResponse } from '../shared/sendResponse';
-import { IPaginationOptions } from '../inerfaces/pagination';
 import { paginationHelpers } from './paginationHelper';
 
 // Build search and filter conditions

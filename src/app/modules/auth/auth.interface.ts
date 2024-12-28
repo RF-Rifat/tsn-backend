@@ -1,4 +1,4 @@
-import { ICompanyProfile } from '../profile/companyProfile/company.interface';
+import { IAgentProfile } from '../profile/agentProfile/agent.interface';
 import { IUserProfile } from '../profile/userProfile/user.interface';
 
 export type ILoginUser = {
@@ -11,7 +11,7 @@ export type ILoginUserResponse = {
   refreshToken?: string;
   isEmailVerified?: boolean;
   data: {
-    profile?: Partial<ICompanyProfile | IUserProfile>;
+    profile?: Partial<IAgentProfile | IUserProfile>;
   };
 };
 

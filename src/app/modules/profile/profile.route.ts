@@ -2,13 +2,13 @@ import express from 'express';
 import { ENUM_USER_ROLE } from '../../../enums/role';
 import { FileUploadHelper } from '../../../helper/FileUploadHelper';
 import auth from '../../middlewares/auth';
-import { companyProfileController } from './companyProfile/company.controller';
+import { agentProfileController } from './agentProfile/agent.controller';
 import { profileController } from './profile.controller';
 import { UserProfileController } from './userProfile/user.controller';
 
 const router = express.Router();
 
-const companyUrl = '/company';
+const agentUrl = '/agent';
 const userUrl = '/user';
 // const admin = '/admin';
 
@@ -19,29 +19,26 @@ router.get(
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.USER,
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
   ),
   profileController.getProfileByUserId,
 );
 
-router.get(
-  `${userUrl}/ready`,
-  UserProfileController.getAllReadyUserProfile,
-);
+router.get(`${userUrl}/ready`, UserProfileController.getAllReadyUserProfile);
 
-// company profile routes
+// agent profile routes
 router.post(
-  `${companyUrl}`,
-  auth(ENUM_USER_ROLE.COMPANY),
+  `${agentUrl}`,
+  auth(ENUM_USER_ROLE.AGENT),
   FileUploadHelper.upload.single('logo'),
-  companyProfileController.createCompanyProfile,
+  agentProfileController.createAgentProfile,
 );
 
 router.patch(
-  `${companyUrl}/:id`,
-  auth(ENUM_USER_ROLE.COMPANY),
+  `${agentUrl}/:id`,
+  auth(ENUM_USER_ROLE.AGENT),
   FileUploadHelper.upload.single('logo'),
-  companyProfileController.updateCompanyProfile,
+  agentProfileController.updateAgentProfile,
 );
 
 // User profile routes

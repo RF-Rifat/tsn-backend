@@ -1,7 +1,7 @@
-import { Schema, model, Types } from 'mongoose';
-import { ICompanyProfile } from './company.interface';
+import { model, Schema, Types } from 'mongoose';
+import { IAgentProfile } from './agent.interface';
 
-const CompanyProfileSchema = new Schema<ICompanyProfile>(
+const AgentProfileSchema = new Schema<IAgentProfile>(
   {
     user: {
       type: Types.ObjectId,
@@ -16,7 +16,7 @@ const CompanyProfileSchema = new Schema<ICompanyProfile>(
       type: String,
       required: true,
     },
-    companySize: {
+    agentSize: {
       type: String,
       enum: ['1-10', '11-50', '51-200', '201-500', '501-1000', '1000+'],
       required: true,
@@ -74,7 +74,7 @@ const CompanyProfileSchema = new Schema<ICompanyProfile>(
   },
 );
 
-export const CompanyProfile = model<ICompanyProfile>(
-  'CompanyProfile',
-  CompanyProfileSchema,
+export const AgentProfile = model<IAgentProfile>(
+  'AgentProfile',
+  AgentProfileSchema,
 );

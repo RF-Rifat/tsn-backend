@@ -3,9 +3,9 @@ import { ENUM_USER_ROLE } from '../../../enums/role';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/ValidateRequest';
 import { AdminController } from './admin/admin.controller';
+import { agentController } from './agent/agent.controller';
 import { AuthController } from './auth.controller';
 import { authValidationSchema } from './auth.validation';
-import { companyController } from './company/company.controller';
 import { userController } from './user/user.controller';
 
 const router = express.Router();
@@ -18,20 +18,20 @@ router.post(
 
 // admin
 router.post('/register/admin', AdminController.adminRegistration);
-// company registration
-router.post('/register/company', companyController.companyRegistration);
+// agent registration
+router.post('/register/agent', agentController.agentRegistration);
 
 // User Registration
 router.post('/register/user', userController.userRegistration);
 
-// verifiy email
+// verify email
 router.patch(
   '/verify-email',
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.USER,
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
   ),
   AuthController.verifyEmail,
 );
@@ -48,7 +48,7 @@ router.patch(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.USER,
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
   ),
   AuthController.changePassword,
 );
@@ -59,7 +59,7 @@ router.patch(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.USER,
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
   ),
   AuthController.changeEmail,
 );
@@ -74,7 +74,7 @@ router.post(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.USER,
-    ENUM_USER_ROLE.COMPANY,
+    ENUM_USER_ROLE.AGENT,
   ),
   AuthController.sendVerificationEmail,
 );
