@@ -1,5 +1,3 @@
-
-
 export type UniversityData = {
   _id?: string;
   name: string;

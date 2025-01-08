@@ -1,11 +1,3 @@
-/**
- * Title: 'Server running mechanism'
- * Description: 'it's page I handled server running mechanism'
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 import mongoose from 'mongoose';
 import config from './config/index';
 import app from './app';

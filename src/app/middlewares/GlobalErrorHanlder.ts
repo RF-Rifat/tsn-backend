@@ -1,11 +1,3 @@
-/**
- * Title: 'Global error handler.'
- * Description: 'In this handler I handled all of error  in this Application'
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */

@@ -1,11 +1,3 @@
-/**
- * Title: 'By using pick I Picking filtering and searching data'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 const pick = <T extends object, k extends keyof T>(
   obj: T,
   keys: k[],

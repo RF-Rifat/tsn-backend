@@ -1,11 +1,3 @@
-/**
- * Title: 'Admin Authentication service'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 171-07-2024
- *
- */
-
 import { IUser } from '../../user/user.interface';
 import { User } from '../../user/user.model';
 import { AuthService } from '../auth.service';

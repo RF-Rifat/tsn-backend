@@ -1,11 +1,3 @@
-/**
- * Title: 'Application'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Application } from 'express';

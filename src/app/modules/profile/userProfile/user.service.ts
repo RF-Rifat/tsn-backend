@@ -201,7 +201,7 @@ const getAllUnverifiedUserProfile = async (
   };
 };
 
-const updateUserProfileByadmin = async (
+const updateUserProfileByAdmin = async (
   profileId: string,
   payload: Partial<IUserProfile>,
 ) => {
@@ -406,6 +406,6 @@ export const userServiceProfile = {
   updateUserProfile,
   verifyUserNid,
   getAllUnverifiedUserProfile,
-  updateUserProfileByadmin,
+  updateUserProfileByAdmin,
   getAllReadyProfile,
 };

@@ -1,11 +1,3 @@
-/**
- * Title: 'Handling validateRequest'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject, ZodEffects } from 'zod';
 

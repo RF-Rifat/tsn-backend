@@ -1,11 +1,3 @@
-/**
- * Title: 'handling zod error'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 import { ZodError, ZodIssue } from 'zod';
 import { IErrorMessages } from '../interfaces/error';
 

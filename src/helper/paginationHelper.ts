@@ -1,11 +1,3 @@
-/**
- * Title: 'Pagination Utilites'
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 29-12-2023
- *
- */
-
 import { SortOrder } from 'mongoose';
 
 type IOptions = {

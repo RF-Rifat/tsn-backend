@@ -1,11 +1,3 @@
-// /**
-//  * Title: 'Logger file handle to store all of errors or success history'
-//  * Description: ''
-//  * Author: 'Masum Rana'
-//  * Date: 27-12-2023
-//  *
-//  */
-
 // import { createLogger, format, transports } from 'winston';
 // import DailyRotateFile from 'winston-daily-rotate-file';
 

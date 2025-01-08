@@ -1,11 +1,3 @@
-/**
- * Title: 'Handling cast  error;
- * Description: ''
- * Author: 'Masum Rana'
- * Date: 27-12-2023
- *
- */
-
 import mongoose from 'mongoose';
 import { IErrorMessages } from '../interfaces/error';
 
