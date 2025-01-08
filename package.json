@@ -13,8 +13,7 @@
     "prettier:fix": "npx prettier --write .",
     "lint-prettier": "npm run lint:check && npm run prettier:check",
     "lint-staged": "lint-staged",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
     "src/**/*.ts": "npm run lint-prettier"
@@ -34,7 +33,6 @@
     "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
-    "husky": "^8.0.0",
     "lint-staged": "^15.1.0",
     "prettier": "^3.1.0",
     "typescript": "^5.2.2"
