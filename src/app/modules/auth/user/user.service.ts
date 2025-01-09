@@ -25,7 +25,6 @@ const userRegistration = async (
 
   try {
     const user = await User.create(payload);
-    console.log(user);
     await AuthService.sendVerificationEmail({
       email: user?.email,
       name: user?.name,
