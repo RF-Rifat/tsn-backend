@@ -78,7 +78,7 @@ const updateUserProfileStatusByAdmin = catchAsync(
     const profileId = req.params.id;
     const payload = req.body;
 
-    const result = await userServiceProfile.updateUserProfileByadmin(
+    const result = await userServiceProfile.updateUserProfileByAdmin(
       profileId,
       payload,
     );

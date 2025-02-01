@@ -21,6 +21,6 @@ export default {
     refreshTokenSecret: process.env.JWT_REFRESHTOKEN_SECRET,
     accessTokenExpireIn: process.env.JWT_ACCESSTOKEN_EXPIRE,
     refreshTokenExpireIn: process.env.JWT_REFRESHTOKEN_EXPIRE,
-    tokenSecret: process.env.JWT_TOKEN_SESECRET,
+    tokenSecret: process.env.JWT_TOKEN_SECRET,
   },
 };
