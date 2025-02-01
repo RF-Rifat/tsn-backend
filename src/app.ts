@@ -8,11 +8,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: [
-      'http://localhost:3000',
-      'http://tsneduglownetwork.com',
-      'https://tsn-backend.net',
-    ],
+    origin: ['http://localhost:3000', 'https://tsneduglownetwork.com/'],
     credentials: true,
   }),
 );
